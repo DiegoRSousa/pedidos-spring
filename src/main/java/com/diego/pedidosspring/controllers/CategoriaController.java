@@ -34,7 +34,7 @@ public class CategoriaController {
 	
 	@RequestMapping(value = "/search/{descricao}", method = RequestMethod.GET)
 	public ResponseEntity<List<Categoria>> search(@PathVariable String descricao) {
-		return ResponseEntity.ok(categoriaService.findByDescricaoContaining(descricao));
+		return ResponseEntity.ok(categoriaService.findByDescricaoContainingIgnoreCase(descricao));
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

@@ -12,5 +12,5 @@ import com.diego.pedidosspring.model.Categoria;
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
 	@Transactional(readOnly = true)
-	List<Categoria> findByDescricaoContaining(String descricao);
+	List<Categoria> findByDescricaoContainingIgnoreCase(String descricao);
 }

@@ -26,8 +26,8 @@ public class CategoriaService {
 				"Objeto não encontrado!" + " Id: " + id + ", Tipo: " + Categoria.class.getName()));
 	}
 	
-	public List<Categoria> findByDescricaoContaining(String descricao) {
-		List<Categoria> categorias = categoriaRepository.findByDescricaoContaining(descricao);
+	public List<Categoria> findByDescricaoContainingIgnoreCase(String descricao) {
+		List<Categoria> categorias = categoriaRepository.findByDescricaoContainingIgnoreCase(descricao);
 		if(categorias.isEmpty())
 			throw new ObjectNotFoundException("Nenhum objeto encontrado com a descrição: " + descricao);
 		return categorias;
