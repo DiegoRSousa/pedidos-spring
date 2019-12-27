@@ -2,6 +2,7 @@ package com.diego.pedidosspring.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,9 @@ public class ProdutoService {
 		Categoria categoria = categoriaService.findById(produtoDTO.getCategoriaId());
 		return new Produto(produtoDTO.getId(), produtoDTO.getCodigo(), produtoDTO.getDescricao(), 
 				produtoDTO.getPreco(), categoria);
+	}
+	
+	public List<ProdutoDTO> toDTO(List<Produto> produtos) {
+		return produtos.stream().map(p -> new ProdutoDTO(p)).collect(Collectors.toList());
 	}
 }

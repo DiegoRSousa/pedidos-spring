@@ -3,22 +3,35 @@ package com.diego.pedidosspring.services;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.diego.pedidosspring.enums.Perfil;
 import com.diego.pedidosspring.model.Categoria;
 import com.diego.pedidosspring.model.Produto;
+import com.diego.pedidosspring.model.Usuario;
 import com.diego.pedidosspring.repositories.CategoriaRepository;
 import com.diego.pedidosspring.repositories.ProdutoRepository;
+import com.diego.pedidosspring.repositories.UsuarioRepository;
 
 @Service
 public class DBService {
 
 	@Autowired
+	private UsuarioRepository usuarioRepository;
+	@Autowired
 	private CategoriaRepository categoriaRepository;
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	@Autowired
+	private BCryptPasswordEncoder bpe;
 
 	public void instaciateDataBase() {
+		Usuario u1 = new Usuario("admin", bpe.encode("123"));
+		u1.AddPerfil(Perfil.ADMIN);
+		Usuario u2 = new Usuario("padrao", bpe.encode("123"));
+		usuarioRepository.saveAll(Arrays.asList(u1, u2));
+		
 		Categoria c1 = new Categoria("Informática");
 		Categoria c2 = new Categoria("Escritório");
 		Categoria c3 = new Categoria("Esporte");

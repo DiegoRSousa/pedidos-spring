@@ -9,22 +9,16 @@ public class ProdutoDTO {
 	private String descricao;
 	private Double preco;
 	private Long categoriaId;
-	
+	private String categoriaDescricao;
 	
 	public ProdutoDTO() {}
-	public ProdutoDTO(String codigo, String descricao, Double preco, Long categoriaId) {
-		this.codigo = codigo;
-		this.descricao = descricao;
-		this.preco = preco;
-		this.categoriaId = categoriaId;
-	}
-	
 	public ProdutoDTO(Produto produto) {
 		this.id = produto.getId();
 		this.codigo = produto.getCodigo();
 		this.descricao = produto.getDescricao();
 		this.preco = produto.getPreco();
 		this.categoriaId = produto.getCategoria().getId();
+		this.categoriaDescricao = produto.getCategoria().getDescricao();
 	}
 
 	public Long getId() {
@@ -66,7 +60,13 @@ public class ProdutoDTO {
 	public void setCategoriaId(Long categoriaId) {
 		this.categoriaId = categoriaId;
 	}
-
+	
+	public String getCategoriaDescricao() {
+		return categoriaDescricao;
+	}
+	public void setCategoriaDescricao(String categoriaDescricao) {
+		this.categoriaDescricao = categoriaDescricao;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -2,10 +2,10 @@ package com.diego.pedidosspring.controllers;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +27,8 @@ public class ProdutoController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<ProdutoDTO>> findAll() {
 		List<Produto> produtos = produtoService.findAll();
-		return ResponseEntity.ok(toDTO(produtos));
+		List<ProdutoDTO> listProdutosDTO = produtoService.toDTO(produtos); 
+		return ResponseEntity.ok(listProdutosDTO);
 	}
 	
 	@RequestMapping(value="{id}", method = RequestMethod.GET)
@@ -39,31 +40,29 @@ public class ProdutoController {
 	@RequestMapping(value="/search/{codigoOuDescricao}", method = RequestMethod.GET)
 	public ResponseEntity<List<ProdutoDTO>> search(@PathVariable String codigoOuDescricao) {
 		List<Produto> produtos = produtoService.findByDescricaoContainsIgnoreCaseOrCodigo(codigoOuDescricao, codigoOuDescricao);
-		return ResponseEntity.ok(toDTO(produtos));
+		List<ProdutoDTO> listProdutosDTO = produtoService.toDTO(produtos);
+		return ResponseEntity.ok(listProdutosDTO);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> save(@RequestBody ProdutoDTO produtoDTO) {
-		Produto produto = produtoService.fromDTO(produtoDTO);
+	public ResponseEntity<Void> save(@RequestBody ProdutoDTO newProdutoDTO) {
+		Produto produto = produtoService.fromDTO(newProdutoDTO);
 		produtoService.save(produto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(produto.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody ProdutoDTO produtoDTO) {
 		Produto produto = produtoService.fromDTO(produtoDTO);
 		produtoService.update(produto);
 		return ResponseEntity.ok().build();
 	}
-	
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		produtoService.delete(id);
 		return ResponseEntity.noContent().build();
-	}
-	
-	private List<ProdutoDTO> toDTO(List<Produto> produtos) {
-		return  produtos.stream().map(p -> new ProdutoDTO(p)).collect(Collectors.toList());
 	}
 }
