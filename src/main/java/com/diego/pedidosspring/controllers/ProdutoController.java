@@ -3,6 +3,8 @@ package com.diego.pedidosspring.controllers;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -45,7 +47,7 @@ public class ProdutoController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> save(@RequestBody ProdutoDTO newProdutoDTO) {
+	public ResponseEntity<Void> save(@Valid @RequestBody ProdutoDTO newProdutoDTO) {
 		Produto produto = produtoService.fromDTO(newProdutoDTO);
 		produtoService.save(produto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -54,7 +56,7 @@ public class ProdutoController {
 	}
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody ProdutoDTO produtoDTO) {
+	public ResponseEntity<Void> update(@Valid @RequestBody ProdutoDTO produtoDTO) {
 		Produto produto = produtoService.fromDTO(produtoDTO);
 		produtoService.update(produto);
 		return ResponseEntity.ok().build();

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.diego.pedidosspring.model.Categoria;
 import com.diego.pedidosspring.repositories.CategoriaRepository;
+import com.diego.pedidosspring.services.exceptions.DataIntegrityException;
 import com.diego.pedidosspring.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -47,7 +48,7 @@ public class CategoriaService {
 		try {
 			categoriaRepository.deleteById(id);
 		} catch(DataIntegrityViolationException e) {
-			throw new DataIntegrityViolationException("Não é posível excluir uma categoria que possui produtos!");
+			throw new DataIntegrityException("Não é posível excluir uma categoria que possui produtos!");
 		}
 		
 	}

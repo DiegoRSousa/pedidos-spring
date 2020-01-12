@@ -3,6 +3,8 @@ package com.diego.pedidosspring.controllers;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,7 +48,7 @@ public class CategoriaController {
 	
 	@ApiOperation(value="Insere categoria")
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> save(@RequestBody Categoria categoria) {
+	public ResponseEntity<Void> save(@Valid @RequestBody Categoria categoria) {
 		categoriaService.save(categoria);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 					.buildAndExpand(categoria.getId()).toUri();
@@ -55,7 +57,7 @@ public class CategoriaController {
 	
 	@ApiOperation(value="Atualiza categoria")
 	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Categoria categoria) {
+	public ResponseEntity<Void> update(@Valid @RequestBody Categoria categoria) {
 		categoriaService.update(categoria);
 		return ResponseEntity.ok().build();
 	}

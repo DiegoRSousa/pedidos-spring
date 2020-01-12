@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Categoria implements Serializable{
@@ -15,7 +18,10 @@ public class Categoria implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=3, max=80, message = "o tamanho deve ser entre 3 e 80")
 	private String descricao;
+	
 	public Categoria() {}
 	public Categoria(String descricao) {
 		this.descricao = descricao;
