@@ -11,6 +11,7 @@ import com.diego.pedidosspring.dto.ProdutoDTO;
 import com.diego.pedidosspring.model.Categoria;
 import com.diego.pedidosspring.model.Produto;
 import com.diego.pedidosspring.repositories.ProdutoRepository;
+import com.diego.pedidosspring.services.exceptions.ConstraintException;
 import com.diego.pedidosspring.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -39,6 +40,8 @@ public class ProdutoService {
 	}
 	
 	public Produto save(Produto produto) {
+		if(produtoRepository.findByCodigo(produto.getCodigo()) != null)
+			throw new ConstraintException("Código:"+ produto.getCodigo() +" já existe!");
 		return produtoRepository.save(produto);
 	}
 	

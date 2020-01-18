@@ -1,8 +1,9 @@
 package com.diego.pedidosspring.dto;
 
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -11,11 +12,11 @@ import com.diego.pedidosspring.model.Produto;
 public class ProdutoDTO {
 
 	private Long id;
-	@NotEmpty(message="Preenchimento obrigatório")
-	@Length(min=4, max=4, message = "o tamanho deve ser 4")
+	@NotBlank(message = "Preenchimento obrigatório")
+	@Size(min = 1, max = 4, message = "Deve conter entre 1 e 4 caracteres")
 	private String codigo;
-	@NotEmpty(message="Preenchimento obrigatório")
-	@Length(min=3, max=80, message = "o tamanho deve ser entre 3 e 80")
+	@NotBlank(message = "Preenchimento obrigatório")
+	@Length(min=3, max=80, message = "O tamanho deve ter entre 3 e 80")
 	private String descricao;
 	@Digits(integer = 5, fraction = 2, message="Apenas números com duas casas decimais")
 	private Double preco;

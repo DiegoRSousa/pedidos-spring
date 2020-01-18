@@ -10,5 +10,8 @@ import com.diego.pedidosspring.model.Produto;
 public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 	
 	@Transactional(readOnly = true)
-	List<Produto> findByDescricaoContainsIgnoreCaseOrCodigo(String descricao, String codigo);	
+	List<Produto> findByDescricaoContainsIgnoreCaseOrCodigo(String descricao, String codigo);
+	
+	@Transactional(readOnly = true)
+	Produto findByCodigo(String codigo);
 }

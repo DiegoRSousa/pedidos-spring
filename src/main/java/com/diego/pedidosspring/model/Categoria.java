@@ -19,7 +19,7 @@ public class Categoria implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotEmpty(message="Preenchimento obrigatório")
-	@Length(min=3, max=80, message = "o tamanho deve ser entre 3 e 80")
+	@Length(min=3, max=80, message = "O tamanho deve ter entre 3 e 80")
 	private String descricao;
 	
 	public Categoria() {}

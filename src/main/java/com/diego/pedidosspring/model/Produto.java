@@ -2,22 +2,33 @@ package com.diego.pedidosspring.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Produto implements Serializable{
 
-	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank(message = "Preenchimento obrigatório")
+	@Size(min = 1, max = 4, message = "Deve conter entre 1 e 4 caracteres")
+	@Column(unique = true)
 	private String codigo;
+	@NotBlank(message = "Preenchimento obrigatório")
+	@Length(min=3, max=80, message = "O tamanho deve ter entre 3 e 80")
 	private String descricao;
+	@Digits(integer = 5, fraction = 2, message="Apenas números com duas casas decimais")
 	private Double preco;
 
 	@ManyToOne
