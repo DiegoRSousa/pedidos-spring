@@ -2,21 +2,21 @@ package com.diego.pedidosspring.dto;
 
 public class CredenciaisDTO {
 
-	private String nome;
-	private String senha;
+	private String userName;
+	private String password;
 	
 	public CredenciaisDTO() { }
 	
-	public String getNome() {
-		return nome;
+	public String getUserName() {
+		return userName;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

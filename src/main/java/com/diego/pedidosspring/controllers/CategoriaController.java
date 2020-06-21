@@ -63,7 +63,8 @@ public class CategoriaController {
 	}
 	
 	@ApiOperation(value="Remove categoria")
-	@ApiResponses(value = {@ApiResponse(code = 400, message = "Não é possível excluir uma categoria que possui produtos")})
+	@ApiResponses(value = {@ApiResponse(code = 400, 
+			message = "Não é possível excluir uma categoria que possui produtos")})
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		categoriaService.delete(id);
