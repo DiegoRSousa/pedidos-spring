@@ -23,6 +23,10 @@ public class Categoria implements Serializable{
 	private String descricao;
 	
 	public Categoria() {}
+	public Categoria(Long id, String descricao) {
+		this.id = id;
+		this.descricao = descricao;
+	}
 	public Categoria(String descricao) {
 		this.descricao = descricao;
 	}

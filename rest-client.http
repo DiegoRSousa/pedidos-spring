@@ -4,6 +4,9 @@ POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
-    "userName": "admin",
-    "password": "123"
+    "nome": "admin",
+    "senha": "123"
 }
+###
+GET {{baseUrl}}/categorias
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MzAwODUwOH0.Tvqs75hiN_1xSqXmjYjVX-eoKk-xFKkhGJlygmxqP45ZezbbYTEgHSsYfj3tleUQfdU2oW-mubbOQLGEZSziQA
