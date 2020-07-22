@@ -7,6 +7,7 @@ Content-Type: application/json
     "nome": "admin",
     "senha": "123"
 }
+
 ###
-GET {{baseUrl}}/categorias
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MzAwODUwOH0.Tvqs75hiN_1xSqXmjYjVX-eoKk-xFKkhGJlygmxqP45ZezbbYTEgHSsYfj3tleUQfdU2oW-mubbOQLGEZSziQA
+GET {{baseUrl}}/categorias/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MzA1NDM1Mn0.wx6p77hAICJM71YGfaSah2cNFveTikHHLlbOVlJugyqK7NNrWQ55Z7PWB-VzGNoNf93FQQqtNH03JhCWs55M6A
