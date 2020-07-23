@@ -3,6 +3,9 @@ package com.diego.pedidosspring.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.diego.pedidosspring.exceptions.ObjectNotFoundException;
@@ -29,6 +33,17 @@ public class ClienteController {
 	public ResponseEntity<List<Cliente>> findAll() {
 		return ResponseEntity.ok(clienteRepository.findAll());
 	}
+	
+	@GetMapping("/page")
+	public ResponseEntity<Page<Cliente>> findAllPage(
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "size", defaultValue = "24") Integer size,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
+			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy) {
+		var pageRequest = PageRequest.of(page, size, Direction.valueOf(direction), orderBy);
+		return ResponseEntity.ok(clienteRepository.findAll(pageRequest));
+	}
+	
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Cliente> find(@PathVariable Long id) {

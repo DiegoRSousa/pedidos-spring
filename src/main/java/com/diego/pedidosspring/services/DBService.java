@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.diego.pedidosspring.enums.Perfil;
 import com.diego.pedidosspring.model.Categoria;
+import com.diego.pedidosspring.model.Cliente;
 import com.diego.pedidosspring.model.Produto;
 import com.diego.pedidosspring.model.Usuario;
 import com.diego.pedidosspring.repositories.CategoriaRepository;
+import com.diego.pedidosspring.repositories.ClienteRepository;
 import com.diego.pedidosspring.repositories.ProdutoRepository;
 import com.diego.pedidosspring.repositories.UsuarioRepository;
 
@@ -23,6 +25,8 @@ public class DBService {
 	private CategoriaRepository categoriaRepository;
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
 	@Autowired
 	private BCryptPasswordEncoder bpe;
 
@@ -43,5 +47,19 @@ public class DBService {
 		Produto p4 = new Produto("0004", "Bike Soul 29", 1700.00, c3);
 		Produto p5 = new Produto("0005", "Bike Caloi 29", 1650.00, c3);
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+		
+		
+		var cl1 = new Cliente("Cliente 1");
+		var cl2 = new Cliente("Cliente 2");
+		var cl3 = new Cliente("Cliente 3");
+		var cl4 = new Cliente("Cliente 4");
+		var cl5 = new Cliente("Cliente 5");
+		var cl6 = new Cliente("Cliente 6");
+		var cl7 = new Cliente("Cliente 7");
+		var cl8 = new Cliente("Cliente 8");
+		var cl9 = new Cliente("Cliente 9");
+		var cl10 = new Cliente("Cliente 10");
+		clienteRepository.saveAll(Arrays.asList(cl1, cl2, cl3, cl4, cl5, cl6, cl7, cl8, cl9, cl10));
+		
 	}
 }
