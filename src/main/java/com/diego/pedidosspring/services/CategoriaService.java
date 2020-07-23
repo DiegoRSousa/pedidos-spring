@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.diego.pedidosspring.exceptions.DataIntegrityException;
+import com.diego.pedidosspring.exceptions.ObjectNotFoundException;
 import com.diego.pedidosspring.model.Categoria;
 import com.diego.pedidosspring.repositories.CategoriaRepository;
-import com.diego.pedidosspring.services.exceptions.DataIntegrityException;
-import com.diego.pedidosspring.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {

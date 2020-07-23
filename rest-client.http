@@ -10,4 +10,11 @@ Content-Type: application/json
 
 ###
 GET {{baseUrl}}/categorias/1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5MzA1NDM1Mn0.wx6p77hAICJM71YGfaSah2cNFveTikHHLlbOVlJugyqK7NNrWQ55Z7PWB-VzGNoNf93FQQqtNH03JhCWs55M6A
+
+
+###
+GET {{baseUrl}}/clientes
+Authorization: Bearer 
+
+
+

@@ -1,4 +1,4 @@
-package com.diego.pedidosspring.services.exceptions;
+package com.diego.pedidosspring.exceptions;
 
 public class ConstraintException extends RuntimeException{
 

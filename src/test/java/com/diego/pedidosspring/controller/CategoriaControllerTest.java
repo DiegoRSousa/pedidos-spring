@@ -25,11 +25,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.diego.pedidosspring.PedidosSpringApplication;
 import com.diego.pedidosspring.controllers.CategoriaController;
 import com.diego.pedidosspring.controllers.exceptions.ControllerExceptionHandler;
+import com.diego.pedidosspring.exceptions.ObjectNotFoundException;
 import com.diego.pedidosspring.model.Categoria;
 import com.diego.pedidosspring.model.Produto;
 import com.diego.pedidosspring.security.JWTUtil;
 import com.diego.pedidosspring.services.CategoriaService;
-import com.diego.pedidosspring.services.exceptions.ObjectNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.net.HttpHeaders;
 

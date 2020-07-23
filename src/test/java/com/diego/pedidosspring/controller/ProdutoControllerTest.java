@@ -27,12 +27,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.diego.pedidosspring.PedidosSpringApplication;
 import com.diego.pedidosspring.controllers.ProdutoController;
 import com.diego.pedidosspring.controllers.exceptions.ControllerExceptionHandler;
+import com.diego.pedidosspring.exceptions.ObjectNotFoundException;
 import com.diego.pedidosspring.model.Categoria;
 import com.diego.pedidosspring.model.Produto;
 import com.diego.pedidosspring.security.JWTUtil;
 import com.diego.pedidosspring.services.CategoriaService;
 import com.diego.pedidosspring.services.ProdutoService;
-import com.diego.pedidosspring.services.exceptions.ObjectNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @WithMockUser(username = "admin")

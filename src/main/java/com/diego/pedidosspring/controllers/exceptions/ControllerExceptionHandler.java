@@ -9,9 +9,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.diego.pedidosspring.services.exceptions.ConstraintException;
-import com.diego.pedidosspring.services.exceptions.DataIntegrityException;
-import com.diego.pedidosspring.services.exceptions.ObjectNotFoundException;
+import com.diego.pedidosspring.exceptions.ConstraintException;
+import com.diego.pedidosspring.exceptions.DataIntegrityException;
+import com.diego.pedidosspring.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
