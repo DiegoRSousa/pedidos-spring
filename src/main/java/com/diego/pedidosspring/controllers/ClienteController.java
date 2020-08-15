@@ -1,6 +1,9 @@
 package com.diego.pedidosspring.controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.diego.pedidosspring.dto.ClienteForm;
+import com.diego.pedidosspring.dto.ClienteList;
 import com.diego.pedidosspring.exceptions.ObjectNotFoundException;
 import com.diego.pedidosspring.model.Cliente;
 import com.diego.pedidosspring.repositories.ClienteRepository;
@@ -30,36 +35,41 @@ public class ClienteController {
 	private ClienteRepository clienteRepository;
 	
 	@GetMapping
-	public ResponseEntity<List<Cliente>> findAll() {
-		return ResponseEntity.ok(clienteRepository.findAll());
+	public ResponseEntity<List<ClienteList>> findAll() {
+		return ResponseEntity.ok(clienteRepository.findAll().stream().map(ClienteList :: new).collect(Collectors.toList()));
 	}
 	
 	@GetMapping("/page")
-	public ResponseEntity<Page<Cliente>> findAllPage(
+	public ResponseEntity<Page<ClienteList>> findAllPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "size", defaultValue = "24") Integer size,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction,
 			@RequestParam(value = "orderBy", defaultValue = "id") String orderBy) {
 		var pageRequest = PageRequest.of(page, size, Direction.valueOf(direction), orderBy);
-		return ResponseEntity.ok(clienteRepository.findAll(pageRequest));
+		var clientes = clienteRepository.findAll(pageRequest);
+		Page<ClienteList> clientesList = clientes.map(ClienteList :: new);
+
+		return ResponseEntity.ok(clientesList);
 	}
 	
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Cliente> find(@PathVariable Long id) {
+	public ResponseEntity<ClienteList> find(@PathVariable Long id) {
 		var cliente = findById(id);
-		return ResponseEntity.ok(cliente);
+		return ResponseEntity.ok(new ClienteList(cliente));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Cliente> save(@RequestBody Cliente cliente) {
-		cliente = clienteRepository.save(cliente);
+	public ResponseEntity<Cliente> save(@RequestBody @Valid ClienteForm clienteForm) {
+		var cliente = clienteRepository.save(clienteForm.toModel());
 		return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);
 	}
 	
-	@PutMapping
-	public ResponseEntity<Cliente> update(@RequestBody Cliente cliente) {
-		cliente = clienteRepository.save(cliente);
+	@PutMapping("/{id}")
+	public ResponseEntity<Cliente> update(@PathVariable Long id, @RequestBody ClienteForm clienteForm) {
+		var cliente = findById(id);
+		cliente.update(clienteForm.toModel());
+		clienteRepository.save(cliente);
 		return ResponseEntity.ok(cliente);
 	}
 	

@@ -1,5 +1,7 @@
 package com.diego.pedidosspring.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,11 +22,29 @@ public class Cliente {
 	private String cpf;
 	@Embedded
 	private Endereco endereco;
+	private LocalDateTime criadoEm = LocalDateTime.now();
+	private LocalDateTime atualizadoEm;
 	
 	public Cliente () {}
 	
 	public Cliente (String nome) {
 		this.nome = nome;
+	}
+	
+	public Cliente (String nome, String cpf, String logradouro, String numero, String bairro) {
+		this.nome = nome;
+		this.cpf = cpf;
+		this.endereco = new Endereco(logradouro, numero, bairro);
+	}
+	
+	public void update(Cliente newCliente) {
+		this.nome = newCliente.nome;
+		this.cpf = newCliente.cpf;
+		this.endereco = new Endereco(
+								newCliente.endereco.getLogradouro(), 
+								newCliente.endereco.getNumero(), 
+								newCliente.endereco.getBairro());
+		this.atualizadoEm = LocalDateTime.now();
 	}
 	
 	public Long getId() {
@@ -52,6 +72,22 @@ public class Cliente {
 		this.endereco = endereco;
 	}
 	
+	public LocalDateTime getCriadoEm() {
+		return criadoEm;
+	}
+
+	public void setCriadoEm(LocalDateTime criadoEm) {
+		this.criadoEm = criadoEm;
+	}
+
+	public LocalDateTime getAtualizadoEm() {
+		return atualizadoEm;
+	}
+
+	public void setAtualizadoEm(LocalDateTime atualizadoEm) {
+		this.atualizadoEm = atualizadoEm;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
