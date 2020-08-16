@@ -9,19 +9,34 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 public class Pedido {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank(message = "Preenchimento obrigatório")
 	private String numero;
+	@NotBlank(message = "Preenchimento obrigatório")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDateTime data;
 	@ManyToOne
 	private Cliente cliente;
 	@OneToMany
 	private List<ProdutoPedido> produtosPedido;
+	@Digits(integer = 7, fraction = 2, message="Apenas números com duas casas decimais")
 	private Double subTotal;
+	@Digits(integer = 7, fraction = 2, message="Apenas números com duas casas decimais")
+	private Double acrescimo;
+	@Digits(integer = 7, fraction = 2, message="Apenas números com duas casas decimais")
+	private Double desconto;
+	@Digits(integer = 7, fraction = 2, message="Apenas números com duas casas decimais")
+	private Double total;
 	private LocalDateTime criadoEm = LocalDateTime.now();
 	
 	public Long getId() {

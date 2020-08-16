@@ -28,7 +28,7 @@ public class Produto implements Serializable{
 	@NotBlank(message = "Preenchimento obrigatório")
 	@Length(min=3, max=80, message = "O tamanho deve ter entre 3 e 80")
 	private String descricao;
-	@Digits(integer = 5, fraction = 2, message="Apenas números com duas casas decimais")
+	@Digits(integer = 7, fraction = 2, message="Apenas números com duas casas decimais")
 	private Double preco;
 
 	@ManyToOne
