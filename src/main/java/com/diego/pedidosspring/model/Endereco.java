@@ -1,12 +1,21 @@
 package com.diego.pedidosspring.model;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 @Embeddable
 public class Endereco {
 
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=3, max=480, message = "O tamanho deve ter entre 3 e 480")
 	private String logradouro;
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=1, max=10, message = "O tamanho deve ter entre 1 e 10")
 	private String numero;
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=3, max=480, message = "O tamanho deve ter entre 3 e 480")
 	private String bairro;
 	
 	public Endereco() { }

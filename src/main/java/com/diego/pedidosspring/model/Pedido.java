@@ -21,6 +21,7 @@ public class Pedido {
 	private Cliente cliente;
 	@OneToMany
 	private List<ProdutoPedido> produtosPedido;
+	private Double subTotal;
 	private LocalDateTime criadoEm = LocalDateTime.now();
 	
 	public Long getId() {
@@ -37,6 +38,9 @@ public class Pedido {
 	}
 	public List<ProdutoPedido> getProdutosPedido() {
 		return produtosPedido;
+	}
+	public Double getSubTotal() {
+		return subTotal;
 	}
 	
 	@Override
