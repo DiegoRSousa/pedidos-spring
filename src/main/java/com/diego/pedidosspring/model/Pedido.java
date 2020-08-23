@@ -56,6 +56,15 @@ public class Pedido {
 	}
 	public Double getSubTotal() {
 		return subTotal;
+	}	
+	public Double getAcrescimo() {
+		return acrescimo;
+	}
+	public Double getDesconto() {
+		return desconto;
+	}
+	public Double getTotal() {
+		return total;
 	}
 	
 	@Override

@@ -17,4 +17,10 @@ GET {{baseUrl}}/clientes
 Authorization: Bearer 
 
 
+### Pedidos 
+GET {{baseUrl}}/pedidos
+
+### Pedidos page
+GET {{baseUrl}}/pedidos/page?size=4&page=1
+
 
